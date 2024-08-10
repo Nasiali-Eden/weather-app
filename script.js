@@ -1,4 +1,4 @@
-const apiKey = "7c90a0e9dd4e41ddd4e93b768bd1bfef";
+const apiKey = "YOUR_API_KEY";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
 
 const locationInput = document.getElementById("locationInput");
@@ -16,6 +16,7 @@ searchButton.addEventListener("click", () => {
 
 function fetchWeather(location) {
   const url = `${apiUrl}?q=${location}&appid=${apiKey}&units=metric`;
+  
 
   fetch(url)
     .then((response) => {
@@ -24,6 +25,7 @@ function fetchWeather(location) {
       }
       return response.json();
     })
+    
     .then((data) => {
       // Check if the main data and weather array are present
       if (data.main && data.weather && data.weather.length > 0) {

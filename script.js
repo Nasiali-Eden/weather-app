@@ -19,32 +19,14 @@ function fetchWeather(location) {
   
 
   fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    
+    .then((response) => response.json())
     .then((data) => {
-      // Check if the main data and weather array are present
-      if (data.main && data.weather && data.weather.length > 0) {
-        locationElement.textContent = data.name;
-        temperatureElement.textContent = `${Math.round(data.main.temp)}°C`;
-        descriptionElement.textContent = data.weather[0].description;
-      } else {
-        console.error('Weather data not available.');
-        locationElement.textContent = 'Location not found';
-        temperatureElement.textContent = '';
-        descriptionElement.textContent = '';
-      }
+      locationElement.textContent = data.name;
+      temperatureElement.textContent = `${Math.round(data.main.temp)}°C`;
+      descriptionElement.textContent = data.weather[0].description;
     })
     .catch((error) => {
       console.error("Error fetching weather data:", error);
-      locationElement.textContent = 'Error fetching data';
-      temperatureElement.textContent = '';
-      descriptionElement.textContent = '';
     });
 }
-
 
